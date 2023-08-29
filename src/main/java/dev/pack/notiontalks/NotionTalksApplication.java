@@ -1,6 +1,6 @@
 package dev.pack.notiontalks;
 
-import dev.pack.notiontalks.config.NotionConfigProperties;
+import dev.pack.notiontalks.notion.config.NotionConfigProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
