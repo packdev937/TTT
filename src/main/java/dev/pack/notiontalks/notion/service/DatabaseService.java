@@ -42,7 +42,7 @@ public class DatabaseService {
     private HttpHeaders getDefaultHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
-        headers.set("Notion-Version", notionConfigProperties.apiVerstion());
+        headers.set("Notion-Version", notionConfigProperties.apiVersion());
         headers.set("Authorization", notionConfigProperties.authToken());
 
         return headers;
