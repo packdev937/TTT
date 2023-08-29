@@ -1,7 +1,9 @@
 package dev.pack.notiontalks.notion;
 
 import dev.pack.notiontalks.notion.service.DatabaseService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NotionClient {
 
     // Why public?
@@ -11,5 +13,6 @@ public class NotionClient {
         this.databaseService = databaseService;
     }
 
+    // client.databases.query({database_id})
 
 }
