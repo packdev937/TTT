@@ -1,6 +1,6 @@
-package dev.pack.notiontalks.notion;
+package dev.pack.ttt.notion;
 
-import dev.pack.notiontalks.notion.service.DatabaseService;
+import dev.pack.ttt.notion.service.DatabaseService;
 import org.springframework.stereotype.Component;
 
 @Component

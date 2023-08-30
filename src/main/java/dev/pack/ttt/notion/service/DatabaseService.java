@@ -1,8 +1,8 @@
-package dev.pack.notiontalks.notion.service;
+package dev.pack.ttt.notion.service;
 
-import dev.pack.notiontalks.notion.config.NotionConfigProperties;
-import dev.pack.notiontalks.notion.model.Database;
-import dev.pack.notiontalks.notion.model.Page;
+import dev.pack.ttt.notion.config.NotionConfigProperties;
+import dev.pack.ttt.notion.model.Database;
+import dev.pack.ttt.notion.model.Page;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

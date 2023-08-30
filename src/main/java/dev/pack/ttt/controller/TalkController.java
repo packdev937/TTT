@@ -1,10 +1,10 @@
-package dev.pack.notiontalks.controller;
+package dev.pack.ttt.controller;
 
-import dev.pack.notiontalks.model.Talk;
-import dev.pack.notiontalks.notion.NotionClient;
-import dev.pack.notiontalks.notion.config.NotionConfigProperties;
-import dev.pack.notiontalks.notion.model.Page;
-import dev.pack.notiontalks.service.TalksService;
+import dev.pack.ttt.model.Talk;
+import dev.pack.ttt.notion.NotionClient;
+import dev.pack.ttt.notion.config.NotionConfigProperties;
+import dev.pack.ttt.notion.model.Page;
+import dev.pack.ttt.service.TalksService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

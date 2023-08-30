@@ -1,4 +1,4 @@
-package dev.pack.notiontalks.notion.model;
+package dev.pack.ttt.notion.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -1,4 +1,4 @@
-package dev.pack.notiontalks.notion.config;
+package dev.pack.ttt.notion.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

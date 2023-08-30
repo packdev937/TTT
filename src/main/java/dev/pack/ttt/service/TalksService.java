@@ -1,8 +1,8 @@
-package dev.pack.notiontalks.service;
+package dev.pack.ttt.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import dev.pack.notiontalks.model.Talk;
-import dev.pack.notiontalks.notion.model.Page;
+import dev.pack.ttt.model.Talk;
+import dev.pack.ttt.notion.model.Page;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Service;

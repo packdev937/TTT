@@ -1,4 +1,4 @@
-package dev.pack.notiontalks;
+package dev.pack.ttt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

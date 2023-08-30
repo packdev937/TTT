@@ -1,4 +1,4 @@
-package dev.pack.notiontalks.model;
+package dev.pack.ttt.model;
 
 import java.time.LocalDateTime;
 
