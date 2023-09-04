@@ -3,13 +3,21 @@ package dev.pack.ttt.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import dev.pack.ttt.model.Content;
 import dev.pack.ttt.model.Status;
+import dev.pack.ttt.notion.NotionClient;
+import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Page;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class NotionService {
+
+    private final NotionClient notionClient;
+    private final NotionConfigProperties notionConfigProperties;
 
     public static Content mapPageToContent(Page page) {
         if (page == null) {
