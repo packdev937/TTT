@@ -1,18 +1,14 @@
 package dev.pack.ttt.notion;
 
 import dev.pack.ttt.notion.service.DatabaseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class NotionClient {
 
-    // Why public?
+    // Why declare DatabaseService as PUBLIC?
+    // Used Example Code: List<Page> pages = notionClient.databaseService.query(notionConfigProperties.databaseId());
     public final DatabaseService databaseService;
-
-    public NotionClient(DatabaseService databaseService) {
-        this.databaseService = databaseService;
-    }
-
-    // client.databases.query({database_id})
-
 }

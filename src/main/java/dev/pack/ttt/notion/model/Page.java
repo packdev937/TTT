@@ -17,6 +17,15 @@ public class Page {
 
     // properties are consist of dynamic information
     private JsonNode properties;
+    private JsonNode parent;
+
+    public JsonNode getParent() {
+        return parent;
+    }
+
+    public void setParent(JsonNode parent) {
+        this.parent = parent;
+    }
 
     public String getObject() {
         return object;
