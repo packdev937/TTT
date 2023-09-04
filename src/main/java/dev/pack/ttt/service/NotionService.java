@@ -1,6 +1,5 @@
 package dev.pack.ttt.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import dev.pack.ttt.model.Content;
 import dev.pack.ttt.model.Status;
 import dev.pack.ttt.notion.NotionClient;
@@ -23,18 +22,16 @@ public class NotionService {
         if (page == null) {
             throw new RuntimeException("Properties in Page object is null");
         }
-        String databaseId = page.getParent().get("database_id").asText();
-        String pageId = page.getId();
-        String title = page.getProperties().get("Title").get("title").get(0).get("text")
-            .get("content").asText();
-        LocalDate createdDate = LocalDate.parse(
+        return new Content(page.getParent().get("database_id").asText(), page.getId(),
+            page.getProperties().get("Title").get("title").get(0).get("text")
+                .get("content").asText(), LocalDate.parse(
             page.getProperties().get("Date").get("date").get("start").asText(),
-            DateTimeFormatter.ISO_LOCAL_DATE);
-        String category = page.getProperties().get("Category").get("select").get("name").asText();
-        Status status = Status.valueOf(
-            page.getProperties().get("Status").get("select").get("name").asText());
-
-        return new Content(databaseId, pageId, title, createdDate, category, status);
+            DateTimeFormatter.ISO_LOCAL_DATE),
+            page.getProperties().get("Category").get("select").get("name").asText(), Status.valueOf(
+            page.getProperties().get("Status").get("select").get("name").asText()));
     }
 
+    public List<Page> findAll() {
+        return notionClient.databaseService.query(notionConfigProperties.databaseId());
+    }
 }
