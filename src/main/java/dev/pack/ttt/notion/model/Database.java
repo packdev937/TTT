@@ -8,11 +8,11 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class Database {
+public class Database<T> {
 
     private String object;
     @JsonProperty("results")
-    private List<Page> pages = new ArrayList<>();
+    private List<T> results = new ArrayList<>();
     @JsonProperty("next_cursor")
     private Boolean nextCursor;
     @JsonProperty("has_more")
