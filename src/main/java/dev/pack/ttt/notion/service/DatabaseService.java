@@ -1,11 +1,13 @@
 package dev.pack.ttt.notion.service;
 
 import dev.pack.ttt.notion.config.NotionConfigProperties;
+import dev.pack.ttt.notion.model.Block;
 import dev.pack.ttt.notion.model.Database;
 import dev.pack.ttt.notion.model.Page;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -30,13 +32,29 @@ public class DatabaseService {
         String url = notionConfigProperties.apiUrl() + "/v1/databases/" + databaseId + "/query";
         log.info("Querying Notion database: {}", url);
 
-        ResponseEntity<Database> db = restTemplate.exchange(
+        ResponseEntity<Database<Page>> db = restTemplate.exchange(
             url,
             HttpMethod.POST,
             new HttpEntity<>(getDefaultHeaders()),
-            Database.class
+            new ParameterizedTypeReference<Database<Page>>() {
+            }
         );
-        return db.getBody().getPages();
+        return db.getBody().getResults();
+    }
+
+    public List<Block> block(String pageId) {
+        String url =
+            notionConfigProperties.apiUrl() + "/v1/blocks/" + pageId + "/children?page_size=100";
+        log.info("Getting Notion block: {}", url);
+
+        ResponseEntity<Database<Block>> db = restTemplate.exchange(
+            url,
+            HttpMethod.GET,
+            new HttpEntity<>(getDefaultHeaders()),
+            new ParameterizedTypeReference<Database<Block>>() {
+            }
+        );
+        return db.getBody().getResults();
     }
 
     private HttpHeaders getDefaultHeaders() {
