@@ -1,6 +1,7 @@
 package dev.pack.ttt.controller;
 
 import dev.pack.ttt.model.Content;
+import dev.pack.ttt.model.Post;
 import dev.pack.ttt.notion.NotionClient;
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Page;
@@ -14,12 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class NotionController {
 
-    private final NotionClient notionClient;
-    private final NotionConfigProperties notionConfigProperties;
+    private final NotionService notionService;
 
     @GetMapping("/pages")
-    public List<Content> findAll() {
-        List<Page> pages = notionClient.databaseService.query(notionConfigProperties.databaseId());
+    public List<Page> findAllPages() {
+        return notionService.findAll();
+    }
+
+    @GetMapping("/contents")
+    public List<Content> findAllContents() {
+        List<Page> pages = findAllPages();
         return pages.stream().map(NotionService::mapPageToContent).toList();
     }
+
 }
