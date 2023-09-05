@@ -1,6 +1,6 @@
 package dev.pack.ttt.controller;
 
-import dev.pack.ttt.model.Talk;
+import dev.pack.ttt.model.Content;
 import dev.pack.ttt.notion.NotionClient;
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Page;
@@ -24,7 +24,7 @@ public class TalkController {
     }
 
     @GetMapping
-    public List<Talk> findAll() {
+    public List<Content> findAll() {
         List<Page> pages = notionClient.databaseService.query(notionConfigProperties.databaseId());
         return pages.stream().map(TalksService::mapPageToTalk).toList();
     }
