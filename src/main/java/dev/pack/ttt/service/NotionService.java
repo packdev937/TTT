@@ -4,9 +4,11 @@ import dev.pack.ttt.model.Content;
 import dev.pack.ttt.model.Status;
 import dev.pack.ttt.notion.NotionClient;
 import dev.pack.ttt.notion.config.NotionConfigProperties;
+import dev.pack.ttt.notion.model.Block;
 import dev.pack.ttt.notion.model.Page;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,21 @@ public class NotionService {
             page.getProperties().get("Status").get("select").get("name").asText()));
     }
 
-    public List<Page> findAll() {
+    public List<Page> findAllContent() {
         return notionClient.databaseService.query(notionConfigProperties.databaseId());
+    }
+
+    public List<Block> findAllBlock(String pageId){
+        return notionClient.databaseService.block(pageId);
+    }
+
+    public List<String> findNotCompletedPageId() {
+        List<String> list = new ArrayList<>();
+        for (Content content : findAllContent().stream().map(NotionService::mapPageToContent).toList()) {
+            if (content.status().equals(Status.NOT_COMPLETED)) {
+                list.add(content.pageId());
+            }
+        }
+        return list;
     }
 }
