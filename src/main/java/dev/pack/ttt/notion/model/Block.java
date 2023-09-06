@@ -85,7 +85,15 @@ public class Block {
         private Object link;
     }
 
-    // properties are consist of dynamic information
-    private JsonNode properties;
-    private JsonNode parent;
-}
+    @Data
+    @ToString
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class Annotations {
+
+        private Boolean bold;
+        private Boolean italic;
+        private Boolean strikethrough;
+        private Boolean underline;
+        private Boolean code;
+        private String color;
+    }
