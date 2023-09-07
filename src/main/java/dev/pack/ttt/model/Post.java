@@ -22,4 +22,11 @@ public class Post {
     private LocalDate publishedDate;
     private StringBuilder html;
 
+    public StringBuilder convertToHtml(){
+        html = new StringBuilder();
+        for(Block block : blocks){
+            html.append(block.convertToHTML());
+        }
+        return html;
+    }
 }
