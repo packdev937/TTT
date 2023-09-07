@@ -41,13 +41,14 @@ public class NotionService {
         return notionClient.databaseService.block(pageId);
     }
 
-    public List<String> findNotCompletedPageId() {
-        List<String> list = new ArrayList<>();
-        for (Content content : findAllContent().stream().map(NotionService::mapPageToContent).toList()) {
-            if (content.status().equals(Status.NOT_COMPLETED)) {
-                list.add(content.pageId());
+    public List<Content> findUploadingPages() {
+        List<Content> pages = new ArrayList<>();
+        for (Content content : findAllContent().stream().map(NotionService::mapPageToContent)
+            .toList()) {
+            if (content.status().equals(Status.UPLOADING)) {
+                pages.add(content);
             }
         }
-        return list;
+        return pages;
     }
 }
