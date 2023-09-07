@@ -6,6 +6,7 @@ import dev.pack.ttt.notion.NotionClient;
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Block;
 import dev.pack.ttt.notion.model.Page;
+import dev.pack.ttt.tistory.service.TistoryService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class NotionService {
 
     private final NotionClient notionClient;
     private final NotionConfigProperties notionConfigProperties;
+    private final TistoryService tistoryService;
 
     public static Content mapPageToContent(Page page) {
         if (page == null) {
@@ -33,11 +35,29 @@ public class NotionService {
             page.getProperties().get("Status").get("select").get("name").asText()));
     }
 
+
+    public List<Post> convertBlockToPost() {
+        // Initialization
+        List<Post> posts = new ArrayList<>();
+        List<Content> notCompletedPage = findUploadingPages();
+
+        for (Content content : notCompletedPage) {
+            List<Block> blocks = findAllBlock(content.pageId());
+
+            Post post = Post.builder()
+                .content(content)
+                .blocks(blocks)
+                .build();
+            posts.add(post);
+        }
+        return posts;
+    }
+
     public List<Page> findAllContent() {
         return notionClient.databaseService.query(notionConfigProperties.databaseId());
     }
 
-    public List<Block> findAllBlock(String pageId){
+    public List<Block> findAllBlock(String pageId) {
         return notionClient.databaseService.block(pageId);
     }
 
