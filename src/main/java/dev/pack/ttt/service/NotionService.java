@@ -20,9 +20,12 @@ public class NotionService {
 
     private final NotionClient notionClient;
     private final NotionConfigProperties notionConfigProperties;
-    private final TistoryService tistoryService;
 
-    public static Content mapPageToContent(Page page) {
+    private static final Logger log = LoggerFactory.getLogger(NotionService.class);
+
+
+    public Content mapPageToContent(Page page) {
+        log.info("Call mapPageToContent()");
         if (page == null) {
             throw new RuntimeException("Properties in Page object is null");
         }
@@ -37,6 +40,7 @@ public class NotionService {
 
 
     public List<Post> convertBlockToPost() {
+        log.info("Call convertBlockToPost()");
         // Initialization
         List<Post> posts = new ArrayList<>();
         List<Content> notCompletedPage = findUploadingPages();
@@ -54,6 +58,7 @@ public class NotionService {
     }
 
     public List<Page> findAllContent() {
+        log.info("Call findAllContent()");
         return notionClient.databaseService.query(notionConfigProperties.databaseId());
     }
 
@@ -62,6 +67,7 @@ public class NotionService {
     }
 
     public List<Content> findUploadingPages() {
+        log.info("Call findUploadingPages()");
         List<Content> pages = new ArrayList<>();
         for (Content content : findAllContent().stream().map(NotionService::mapPageToContent)
             .toList()) {
