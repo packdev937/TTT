@@ -85,13 +85,13 @@ public class Post {
 
             if (annotations != null) {
                 if (annotations.getBold()) {
-                    content = "**" + content + "**";
+                    content = "<strong>" + content + "</strong>";
                 }
                 if (annotations.getItalic()) {
-                    content = "*" + content + "*";
+                    content = "<em>" + content + "</em>";
                 }
                 if (annotations.getStrikethrough()) {
-                    content = "~~" + content + "~~";
+                    content = "<del>" + content + "</del>";
                 }
                 if (annotations.getUnderline()) {
                     content = "<u>" + content + "</u>";
@@ -101,47 +101,9 @@ public class Post {
                 }
             }
 
+
             htmlBuilder.append(content+" ");
 
-//            switch (type) {
-//                case "heading_1":
-//                    htmlBuilder.append("<h1>").append(content).append("</h1>");
-//                    break;
-//                case "heading_2":
-//                    htmlBuilder.append("<h2>").append(content).append("</h2>");
-//                    break;
-//                case "heading_3":
-//                    htmlBuilder.append("<h3>").append(content).append("</h3>");
-//                    break;
-//                case "bulleted_list_item":
-//                    htmlBuilder.append("<ul><li>").append(content).append("</li></ul>");
-//                    break;
-//                case "numbered_list_item":
-//                    htmlBuilder.append("<ol><li>").append(content).append("</li></ol>");
-//                    break;
-//                case "paragraph":
-//                    htmlBuilder.append("<p>").append(content).append("</p>");
-//                    break;
-//                case "to_do":
-//                    htmlBuilder.append("<input type='checkbox'>").append(content).append("<br>");
-//                    break;
-//                case "toggle":
-//                    htmlBuilder.append("<details><summary>").append(content)
-//                        .append("</summary></details>");
-//                    break;
-//                case "quote":
-//                    htmlBuilder.append("<blockquote>").append(content).append("</blockquote>");
-//                    break;
-//                case "callout":
-//                    htmlBuilder.append("<div class='callout'>").append(content).append("</div>");
-//                    break;
-//                case "code":
-//                    htmlBuilder.append("<pre><code>").append(content).append("</code></pre>");
-//                    break;
-//                default:
-//                    htmlBuilder.append(content);
-//                    break;
-//            }
         }
     }
 
@@ -183,7 +145,6 @@ public class Post {
                 htmlBuilder.append("");
                 break;
         }
-
     }
 
     public void addBackTag(String type, StringBuilder htmlBuilder) {
