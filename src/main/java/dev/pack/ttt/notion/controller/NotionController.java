@@ -19,12 +19,4 @@ public class NotionController {
     public List<Page> findAllPages() {
         return notionService.findAllContent();
     }
-
-    // query
-//    @GetMapping("/contents")
-//    public List<Content> findAllContents() {
-//        List<Page> pages = findAllPages();
-//        return pages.stream().map(NotionService::mapPageToContent).toList();
-//    }
-
 }
