@@ -50,10 +50,18 @@ public class Post {
     }
 
     private RichTextWrapper getNonNullRichTextWrapper(Block block) {
-        if (block.getToDo() != null) {
-            return block.getToDo();
+        if (block.getHeading1() != null) {
+            return block.getHeading1();
+        } else if (block.getHeading2() != null) {
+            return block.getHeading2();
+        } else if (block.getHeading3() != null) {
+            return block.getHeading3();
+        } else if (block.getBulletedListItem() != null) {
+            return block.getBulletedListItem();
         } else if (block.getNumberedListItem() != null) {
             return block.getNumberedListItem();
+        } else if (block.getToDo() != null) {
+            return block.getToDo();
         } else if (block.getParagraph() != null) {
             return block.getParagraph();
         } else if (block.getToggle() != null) {
