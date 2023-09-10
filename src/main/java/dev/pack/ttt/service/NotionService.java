@@ -1,17 +1,19 @@
 package dev.pack.ttt.service;
 
 import dev.pack.ttt.model.Content;
+import dev.pack.ttt.model.Post;
 import dev.pack.ttt.model.Status;
 import dev.pack.ttt.notion.NotionClient;
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Block;
 import dev.pack.ttt.notion.model.Page;
-import dev.pack.ttt.tistory.service.TistoryService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +31,7 @@ public class NotionService {
         if (page == null) {
             throw new RuntimeException("Properties in Page object is null");
         }
+
         return new Content(page.getParent().get("database_id").asText(), page.getId(),
             page.getProperties().get("Title").get("title").get(0).get("text")
                 .get("content").asText(), LocalDate.parse(
@@ -48,10 +51,7 @@ public class NotionService {
         for (Content content : notCompletedPage) {
             List<Block> blocks = findAllBlock(content.pageId());
 
-            Post post = Post.builder()
-                .content(content)
-                .blocks(blocks)
-                .build();
+            Post post = new Post(content, blocks);
             posts.add(post);
         }
         return posts;
@@ -69,11 +69,8 @@ public class NotionService {
     public List<Content> findUploadingPages() {
         log.info("Call findUploadingPages()");
         List<Content> pages = new ArrayList<>();
-        for (Content content : findAllContent().stream().map(NotionService::mapPageToContent)
-            .toList()) {
-            if (content.status().equals(Status.UPLOADING)) {
-                pages.add(content);
-            }
+        for (Page page : findAllContent()) {
+            pages.add(mapPageToContent(page));
         }
         return pages;
     }
