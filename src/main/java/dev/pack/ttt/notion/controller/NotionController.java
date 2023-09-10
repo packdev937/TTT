@@ -1,9 +1,6 @@
-package dev.pack.ttt.controller;
+package dev.pack.ttt.notion.controller;
 
 import dev.pack.ttt.model.Content;
-import dev.pack.ttt.model.Post;
-import dev.pack.ttt.notion.NotionClient;
-import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Page;
 import dev.pack.ttt.service.NotionService;
 import java.util.List;
@@ -17,15 +14,17 @@ public class NotionController {
 
     private final NotionService notionService;
 
+    // pages
     @GetMapping("/pages")
     public List<Page> findAllPages() {
-        return notionService.findAll();
+        return notionService.findAllContent();
     }
 
-    @GetMapping("/contents")
-    public List<Content> findAllContents() {
-        List<Page> pages = findAllPages();
-        return pages.stream().map(NotionService::mapPageToContent).toList();
-    }
+    // query
+//    @GetMapping("/contents")
+//    public List<Content> findAllContents() {
+//        List<Page> pages = findAllPages();
+//        return pages.stream().map(NotionService::mapPageToContent).toList();
+//    }
 
 }
