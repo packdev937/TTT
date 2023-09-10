@@ -8,6 +8,13 @@ public class TistoryService {
 
     public Post upload(Post post) {
 
-        return Post.builder().build();
+        return db.getBody();
+    }
+
+    private HttpHeaders getDefaultHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
     }
 }
