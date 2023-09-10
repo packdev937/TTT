@@ -1,5 +1,6 @@
 package dev.pack.ttt.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.pack.ttt.notion.model.Block;
 import dev.pack.ttt.notion.model.Block.Annotations;
 import dev.pack.ttt.notion.model.Block.RichText;
@@ -39,11 +40,14 @@ public class Post {
         StringBuilder htmlBuilder = new StringBuilder();
 
         for (Block block : blocks) {
+            String type = block.getType();
             RichTextWrapper richTextWrapper = getNonNullRichTextWrapper(block);
             if (richTextWrapper != null) {
+                addFrontTag(type, htmlBuilder);
                 for (RichText richText : richTextWrapper.getRichText()) {
-                    convertRichTextToHTML(richText, htmlBuilder);
+                    convertRichTextToHTML(richText, type, htmlBuilder);
                 }
+                addBackTag(type, htmlBuilder);
             }
         }
         return htmlBuilder;
@@ -74,7 +78,7 @@ public class Post {
         return null;
     }
 
-    private void convertRichTextToHTML(RichText richText, StringBuilder htmlBuilder) {
+    private void convertRichTextToHTML(RichText richText, String type, StringBuilder htmlBuilder) {
         if (richText != null) {
             String content = richText.getText().getContent();
             Annotations annotations = richText.getAnnotations();
@@ -93,22 +97,133 @@ public class Post {
                     content = "<u>" + content + "</u>";
                 }
                 if (annotations.getCode()) {
-                    content = "`" + content + "`";
+                    content = "<code>" + content + "</code>";
                 }
             }
 
-            switch (richText.getType()) {
-                case "heading1":
-                    htmlBuilder.append("<h1>").append(content).append("</h1>");
-                    break;
-                case "heading2":
-                    htmlBuilder.append("<h2>").append(content).append("</h2>");
-                    break;
-                // 다른 유형의 머리글에 대한 케이스도 여기에 추가할 수 있습니다.
-                default:
-                    htmlBuilder.append("");
-                    break;
-            }
+            htmlBuilder.append(content+" ");
+
+//            switch (type) {
+//                case "heading_1":
+//                    htmlBuilder.append("<h1>").append(content).append("</h1>");
+//                    break;
+//                case "heading_2":
+//                    htmlBuilder.append("<h2>").append(content).append("</h2>");
+//                    break;
+//                case "heading_3":
+//                    htmlBuilder.append("<h3>").append(content).append("</h3>");
+//                    break;
+//                case "bulleted_list_item":
+//                    htmlBuilder.append("<ul><li>").append(content).append("</li></ul>");
+//                    break;
+//                case "numbered_list_item":
+//                    htmlBuilder.append("<ol><li>").append(content).append("</li></ol>");
+//                    break;
+//                case "paragraph":
+//                    htmlBuilder.append("<p>").append(content).append("</p>");
+//                    break;
+//                case "to_do":
+//                    htmlBuilder.append("<input type='checkbox'>").append(content).append("<br>");
+//                    break;
+//                case "toggle":
+//                    htmlBuilder.append("<details><summary>").append(content)
+//                        .append("</summary></details>");
+//                    break;
+//                case "quote":
+//                    htmlBuilder.append("<blockquote>").append(content).append("</blockquote>");
+//                    break;
+//                case "callout":
+//                    htmlBuilder.append("<div class='callout'>").append(content).append("</div>");
+//                    break;
+//                case "code":
+//                    htmlBuilder.append("<pre><code>").append(content).append("</code></pre>");
+//                    break;
+//                default:
+//                    htmlBuilder.append(content);
+//                    break;
+//            }
+        }
+    }
+
+    public void addFrontTag(String type, StringBuilder htmlBuilder) {
+        switch (type) {
+            case "heading_1":
+                htmlBuilder.append("<h1>");
+            case "heading_2":
+                htmlBuilder.append("<h2>");
+                break;
+            case "heading_3":
+                htmlBuilder.append("<h3>");
+                break;
+            case "bulleted_list_item":
+                htmlBuilder.append("<ul><li>");
+                break;
+            case "numbered_list_item":
+                htmlBuilder.append("<ol><li>");
+                break;
+            case "paragraph":
+                htmlBuilder.append("<p>");
+                break;
+            case "to_do":
+                htmlBuilder.append("<input type='checkbox'>");
+                break;
+            case "toggle":
+                htmlBuilder.append("<details><summary>");
+                break;
+            case "quote":
+                htmlBuilder.append("<blockquote>");
+                break;
+            case "callout":
+                htmlBuilder.append("<div class='callout'>");
+                break;
+            case "code":
+                htmlBuilder.append("<pre><code>");
+                break;
+            default:
+                htmlBuilder.append("");
+                break;
+        }
+
+    }
+
+    public void addBackTag(String type, StringBuilder htmlBuilder) {
+        switch (type) {
+            case "heading_1":
+                htmlBuilder.append("</h1>");
+                break;
+            case "heading_2":
+                htmlBuilder.append("</h2>");
+                break;
+            case "heading_3":
+                htmlBuilder.append("</h3>");
+                break;
+            case "bulleted_list_item":
+                htmlBuilder.append("</li></ul>");
+                break;
+            case "numbered_list_item":
+                htmlBuilder.append("</li></ol>");
+                break;
+            case "paragraph":
+                htmlBuilder.append("</p>");
+                break;
+            case "to_do":
+                htmlBuilder.append("<br>");
+                break;
+            case "toggle":
+                htmlBuilder.append("</summary></details>");
+                break;
+            case "quote":
+                htmlBuilder.append("</blockquote>");
+                break;
+            case "callout":
+                htmlBuilder.append("</div>");
+                break;
+            case "code":
+                htmlBuilder.append("</code></pre>");
+                break;
+            default:
+                htmlBuilder.append("");
+                break;
         }
     }
 }
