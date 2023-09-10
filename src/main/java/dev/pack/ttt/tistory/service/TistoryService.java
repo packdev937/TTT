@@ -2,16 +2,17 @@ package dev.pack.ttt.tistory.service;
 
 import dev.pack.ttt.model.Post;
 import dev.pack.ttt.tistory.config.TistoryConfigProperties;
+import java.time.LocalDate;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -23,32 +24,30 @@ public class TistoryService {
     private final TistoryConfigProperties tistoryConfigProperties;
 
     public String post(Post post) {
-        String url = tistoryConfigProperties.apiUrl()
-            + "/post/write?access_token=" + tistoryConfigProperties.accessToken()
-            + "&output=html"
-            + "&blogName=" + tistoryConfigProperties.blogName()
-            + "&title=" + post.getContent().title()
-            + "&content=" + post.getHtml()
-            + "&visibility=" + post.getVisibility()
-            + "&category=" + post.getCategory()
-            + "&published=" + "2023-09-06"
-            + "&slogan=" + post.getSlogan()
-            + "&tag=" + post.getTag()
-            // 댓글 허용
-            + "&acceptComment=0"
-            + "&password=1234";
+        String url = tistoryConfigProperties.apiUrl() + "/post/write";
 
-        ResponseEntity<String> db = restTemplate.exchange(
-            url,
-            HttpMethod.POST,
-            new HttpEntity<>("", getDefaultHeaders()),
-            new ParameterizedTypeReference<String>() {
-            }
-        );
-        // 헤더 확인
-        log.info("Response Header {}", db.getHeaders());
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("access_token", tistoryConfigProperties.accessToken());
+        body.add("output", "html");
+        body.add("blogName", tistoryConfigProperties.blogName());
+        body.add("title", post.getContent().title());
+        body.add("content", post.getHtml().toString());
+        body.add("visibility", String.valueOf(post.getVisibility()));
+        body.add("category", String.valueOf(post.getCategory()));
+        body.add("published", String.valueOf(LocalDate.now()));
+        body.add("slogan", post.getSlogan());
+        body.add("tag", post.getTag());
+        body.add("acceptComment", "1");
+        body.add("password", "1234");
 
-        return db.getBody();
+        HttpHeaders headers = getDefaultHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+        return response.getBody();
     }
 
     private HttpHeaders getDefaultHeaders() {
