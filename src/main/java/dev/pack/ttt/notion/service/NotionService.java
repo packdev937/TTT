@@ -70,7 +70,10 @@ public class NotionService {
         log.info("Call findUploadingPages()");
         List<Content> pages = new ArrayList<>();
         for (Page page : findAllContent()) {
-            pages.add(mapPageToContent(page));
+            if (page.getProperties().get("Status").asText()
+                .equals(String.valueOf(Status.UPLOADING))) {
+                pages.add(mapPageToContent(page));
+            }
         }
         return pages;
     }
