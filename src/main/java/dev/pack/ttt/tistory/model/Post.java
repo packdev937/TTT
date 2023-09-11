@@ -74,6 +74,8 @@ public class Post {
             return block.getQuote();
         } else if (block.getCallout() != null) {
             return block.getCallout();
+        } else if (block.getCode() != null){
+            return block.getCode();
         }
         return null;
     }
@@ -96,14 +98,11 @@ public class Post {
                 if (annotations.getUnderline()) {
                     content = "<u>" + content + "</u>";
                 }
-                if (annotations.getCode()) {
-                    content = "<code>" + content + "</code>";
-                }
+//                if (annotations.getCode()) {
+//                    content = "<code>" + content + "</code>";
+//                }
             }
-
-
             htmlBuilder.append(content+" ");
-
         }
     }
 

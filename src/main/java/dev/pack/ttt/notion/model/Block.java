@@ -44,19 +44,11 @@ public class Block {
     private RichTextWrapper callout;
 
     @JsonProperty("code")
-    private CodeWrapper code;
+    private RichTextWrapper code;
 
     @Data
     @ToString
     public static class RichTextWrapper {
-
-        @JsonProperty("rich_text")
-        private List<RichText> richText;
-    }
-
-    @Data
-    @ToString
-    public static class CodeWrapper {
 
         @JsonProperty("rich_text")
         private List<RichText> richText;
