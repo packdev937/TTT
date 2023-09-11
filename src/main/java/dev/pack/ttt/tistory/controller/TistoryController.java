@@ -21,8 +21,6 @@ public class TistoryController {
     public String upload() {
         String response = "";
         List<Post> posts = notionService.convertBlockToPost(); // 여기서 return 되어서 넘어오는게 없음
-        // empty set
-        System.out.println(posts.get(0).getHtml());
         for (Post post : posts) {
             try {
                 response = tistoryService.post(post);

@@ -40,6 +40,7 @@ public class TistoryService {
         // 댓글 허용 여부
         body.add("acceptComment", "1");
         body.add("password", "1234");
+        log.info("Querying Tistory database: {}", url);
 
         HttpHeaders headers = getDefaultHeaders();
         // 밑의 JSON이랑 겹치는데 이에 대해 처리할 필요가 있음
