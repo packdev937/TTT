@@ -1,6 +1,6 @@
 package dev.pack.ttt.tistory.service;
 
-import dev.pack.ttt.model.Post;
+import dev.pack.ttt.tistory.model.Post;
 import dev.pack.ttt.tistory.config.TistoryConfigProperties;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -37,10 +37,12 @@ public class TistoryService {
         body.add("published", String.valueOf(LocalDate.now()));
         body.add("slogan", post.getSlogan());
         body.add("tag", post.getTag());
+        // 댓글 허용 여부
         body.add("acceptComment", "1");
         body.add("password", "1234");
 
         HttpHeaders headers = getDefaultHeaders();
+        // 밑의 JSON이랑 겹치는데 이에 대해 처리할 필요가 있음
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);

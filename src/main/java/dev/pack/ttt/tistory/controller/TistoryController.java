@@ -1,7 +1,7 @@
 package dev.pack.ttt.tistory.controller;
 
-import dev.pack.ttt.model.Post;
-import dev.pack.ttt.service.NotionService;
+import dev.pack.ttt.tistory.model.Post;
+import dev.pack.ttt.notion.service.NotionService;
 import dev.pack.ttt.tistory.service.TistoryService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

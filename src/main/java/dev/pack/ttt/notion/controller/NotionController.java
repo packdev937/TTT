@@ -1,8 +1,7 @@
 package dev.pack.ttt.notion.controller;
 
-import dev.pack.ttt.model.Content;
 import dev.pack.ttt.notion.model.Page;
-import dev.pack.ttt.service.NotionService;
+import dev.pack.ttt.notion.service.NotionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

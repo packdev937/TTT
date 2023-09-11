@@ -1,8 +1,8 @@
-package dev.pack.ttt.service;
+package dev.pack.ttt.notion.service;
 
-import dev.pack.ttt.model.Content;
-import dev.pack.ttt.model.Post;
-import dev.pack.ttt.model.Status;
+import dev.pack.ttt.notion.model.Content;
+import dev.pack.ttt.tistory.model.Post;
+import dev.pack.ttt.notion.model.Status;
 import dev.pack.ttt.notion.NotionClient;
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Block;

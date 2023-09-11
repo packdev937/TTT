@@ -1,5 +1,6 @@
-package dev.pack.ttt.model;
+package dev.pack.ttt.notion.model;
 
+import dev.pack.ttt.notion.model.Status;
 import java.time.LocalDate;
 
 public record Content(String databaseId, String pageId, String title, LocalDate createdDate,

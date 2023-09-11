@@ -1,10 +1,10 @@
-package dev.pack.ttt.model;
+package dev.pack.ttt.tistory.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.pack.ttt.notion.model.Block;
 import dev.pack.ttt.notion.model.Block.Annotations;
 import dev.pack.ttt.notion.model.Block.RichText;
 import dev.pack.ttt.notion.model.Block.RichTextWrapper;
+import dev.pack.ttt.notion.model.Content;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AccessLevel;
