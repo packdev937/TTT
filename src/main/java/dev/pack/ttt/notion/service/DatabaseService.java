@@ -2,6 +2,7 @@ package dev.pack.ttt.notion.service;
 
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Block;
+import dev.pack.ttt.notion.model.Content;
 import dev.pack.ttt.notion.model.Database;
 import dev.pack.ttt.notion.model.Page;
 import java.util.List;
@@ -55,6 +56,20 @@ public class DatabaseService {
             }
         );
         return db.getBody().getResults();
+    }
+
+    public String patch(Content content) {
+        String url =
+            notionConfigProperties.apiUrl() + "/v1/databases/" + content.pageId();
+
+        ResponseEntity<String> response = restTemplate.exchange(
+            url,
+            HttpMethod.PATCH,
+            new HttpEntity<>(getDefaultHeaders()),
+            new ParameterizedTypeReference<String>() {
+            }
+        );
+        return url;
     }
 
     private HttpHeaders getDefaultHeaders() {
