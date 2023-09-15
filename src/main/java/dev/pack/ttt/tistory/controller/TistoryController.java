@@ -20,12 +20,14 @@ public class TistoryController {
     @GetMapping("/upload")
     public String upload() {
         String response = "";
-        List<Post> posts = notionService.convertBlockToPost(); // 여기서 return 되어서 넘어오는게 없음
+        List<Post> posts = notionService.convertBlockToPost();
         for (Post post : posts) {
             try {
                 response = tistoryService.post(post);
             } catch (Exception e) {
                 log.info("{}", e);
+            } finally {
+                notionService.updatePageProperty(post.getContent().pageId());
             }
         }
         return response;
