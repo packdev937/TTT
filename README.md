@@ -3,6 +3,8 @@ TTT는 **Transfer To Tistory**의 약자로 노션 페이지를 티스토리 블
 
 ## 버전 
 v1.0.0-beta: Notion To Tistory에 대한 핵심 기능 구현
+
+v1.0.1-beta: Notion Page를 Upload 시 Status가 UPLOADING에서 COMPLETED로 자동 변환
 ## 사전 준비
 서비스를 이용하기 위해서는 Notion API Integration에 Notion 페이지 등록을 진행해야 합니다.
 
