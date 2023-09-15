@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotionController {
 
     private final NotionService notionService;
-
-    // pages
     @GetMapping("/pages")
     public List<Page> findAllPages() {
-        return notionService.findAllContent();
+        return notionService.findAllContents();
     }
 }

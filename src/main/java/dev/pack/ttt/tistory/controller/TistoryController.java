@@ -27,10 +27,9 @@ public class TistoryController {
             } catch (Exception e) {
                 log.info("{}", e);
             } finally {
-                notionService.updatePageProperty(post.getContent().pageId());
+                notionService.updateNotionPageStatus(post.getContent().pageId());
             }
         }
         return response;
     }
-
 }

@@ -26,6 +26,7 @@ public class TistoryService {
     public String post(Post post) {
         String url = tistoryConfigProperties.apiUrl() + "/post/write";
 
+        // 후에 모든 건 커스텀 영역으로 변경
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("access_token", tistoryConfigProperties.accessToken());
         body.add("output", "html");

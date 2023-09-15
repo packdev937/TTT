@@ -2,7 +2,6 @@ package dev.pack.ttt.notion.service;
 
 import dev.pack.ttt.notion.config.NotionConfigProperties;
 import dev.pack.ttt.notion.model.Block;
-import dev.pack.ttt.notion.model.Content;
 import dev.pack.ttt.notion.model.Database;
 import dev.pack.ttt.notion.model.Page;
 import java.util.HashMap;
@@ -66,7 +65,7 @@ public class DatabaseService {
         log.info("Updating Notion page: {}", url);
 
         Map<String, Object> selectProperty = new HashMap<>();
-        selectProperty.put("name", "COMPLETE");
+        selectProperty.put("name", "COMPLETED");
 
         Map<String, Object> statusProperty = new HashMap<>();
         statusProperty.put("select", selectProperty);
