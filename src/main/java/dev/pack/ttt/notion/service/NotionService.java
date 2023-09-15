@@ -77,4 +77,8 @@ public class NotionService {
         }
         return pages;
     }
+
+    public String updateNotionPageStatus(String pageId) {
+        return notionClient.databaseService.patch(pageId);
+    }
 }
