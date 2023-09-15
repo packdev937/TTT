@@ -1,5 +1,5 @@
 # TTT
-![TTT.png](..%2F..%2FDesktop%2FTTT.png)
+<img width="306" alt="TTT" src="https://github.com/packdev937/TTT/assets/89628690/1c51ff1d-3b39-4706-a42d-54fc8ec7e970">
 
 TTT는 **Transfer To Tistory**의 약자로 노션 페이지를 티스토리 블로그에 업로드 하는 스프링 부트 기반 서비스입니다.
 
