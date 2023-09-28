@@ -40,7 +40,7 @@ public class TistoryService {
         body.add("tag", post.getTag());
         // 댓글 허용 여부
         body.add("acceptComment", "1");
-        body.add("password", "1234");
+        body.add("password", tistoryConfigProperties.blogPassword());
         log.info("Querying Tistory database: {}", url);
 
         HttpHeaders headers = getDefaultHeaders();
