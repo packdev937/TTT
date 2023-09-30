@@ -25,7 +25,7 @@ public class NotionService {
     private final NotionClient notionClient;
     private final NotionConfigProperties notionConfigProperties;
 
-
+    // Domain Service로 내려야 될 듯
     public Content mapPageToContent(Page page) {
         log.info("Call mapPageToContent()");
         if (page == null) {

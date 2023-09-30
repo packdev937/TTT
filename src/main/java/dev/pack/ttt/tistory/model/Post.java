@@ -98,9 +98,6 @@ public class Post {
                 if (annotations.getUnderline()) {
                     content = "<u>" + content + "</u>";
                 }
-//                if (annotations.getCode()) {
-//                    content = "<code>" + content + "</code>";
-//                }
             }
             htmlBuilder.append(content+" ");
         }
